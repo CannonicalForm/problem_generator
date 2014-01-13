@@ -1,5 +1,0 @@
-{% extends "base.html" %}
-{% block title %} Random Problem Generator {% endblock %}
-
-{% block header %} Random Problem Generator {% endblock %}
-{% block main %} {% endblock %}
