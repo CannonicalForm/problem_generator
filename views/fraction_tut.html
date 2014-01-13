@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %} Fraction Tutorial {% endblock %}
+{% block main %}
+<h1>Fractions</h1>
+<p>
+  Without thinking, and on a near daily basis, people use fractions
+  to take stock of much around their lives : "There's still half a
+  gallon of milk, so we don't need to go to the store," or "There's
+  only a third of a tank of gas left." Yet, when pressed in an
+  academic setting to perform even simple calculations with
+  fractions, such as
+  \[\frac{5}{9} + \frac{2}{3} \left(= \frac{11}{9}\right)\]
+  the numbers can turn on us, and what was second nature before can
+  become alien. This page is designed to help alleviate that feeling,
+  and with appropriate practice, allow all such calculations involving
+  fractions to be done with ease.
+</p>
+<h3>What is a Fraction?</h3>
+<p>
+  This might seem so obvious that it hurts. After all, thinking up
+  examples of fractions is trivial. However, consider the following
+  list of symbols: which are valid fractions?
+</p>
+<div>
+  <ul class="inl">
+    <li class="inl">\(\frac{1}{3}\)</li>
+    <li class="inl"> \(\frac{3.2}{6}\)</li>
+    <li class="inl"> \(\frac{-9}{8}\)</li>
+    <li class="inl"> \(\frac{7}{0}\)</li>
+    <li class="inl">\(1\frac{3}{7}\)</li>
+  </ul>
+</div>
+<p>
+  If the second, fourth, or fifth examples appear to be fractions,
+  the need for a common vocabulary to describe these objects is
+  apparent.
+</p>
+<div class="def">
+  <p>
+    Properly speaking, a fraction is the ratio of two integers
+    (numbers like 1, 2, -4, 7, ...) a and b, where \(b \ne 0\)
+    and is written as <b>a/b</b>. The top of fraction <b>a</b> is
+    called the <b>numerator</b>, while the bottom of the fraction
+    <b>b</b> is called the <b>denominator</b>.
+  </p>
+</div>
+<p>
+  Using the previous definition, we may determine why
+  \(\frac{3.2}{6}\), \(\frac{7}{0}\) and \(1\frac{3}{7}\) are not
+  fractions. For the first, note that the definition requires that
+  both the numerator and the denominator must be integers. However,
+  3.2 is not an integer, as it is a decimal number, so
+  \(\frac{3.2}{6}\) is not a fraction. In the second example, note
+  that the denominator is explicitly prohibitted from being 0.
+  Therefore \(\frac{7}{0}\) cannot be a fraction. This explicit
+  prohibition is to prevent division by zero, which can play some
+  pretty terrible tricks in mathematics. The last example is most
+  commonly refered to as a <em>mixed number</em>. It is an integer
+  attached to a fractional number, which corresponds to the fraction
+  \(\frac{11}{8}\). However, it is not itself a fraction, as addition,
+  multiplication and reduction work slightly differently with mixed
+  numbers than with fractions.
+</p>
+<h3>Lowest Common Form</h3>
+<p>
+  Typically a fraction is presented in its lowest common form, or
+  as already reduced. A fraction being already reduced is the
+  difference between \(\frac{5}{10}\) and \(\frac{1}{2}\): the second
+  is equivilent to the first, but is presented in its lowest common
+  form. While the lowest common form of fractions can be relatively
+  straightforward, it is not without it's difficulties. Consider
+  the following fractions: which one is reduced?
+</p>
+<div class="def">
+  <ul class="inl">
+    <li class="inl"><b>a.</b> \(\frac{5}{10}\)</li>
+    <li class="inl"><b>b.</b> \(\frac{15}{28}\)</li>
+    <li class="inl"><b>c.</b> \(\frac{12}{33}\)</li>
+    <li class="inl"><b>d.</b> \(\frac{35}{42}\)</li>
+    <li class="inl"><b>e.</b> \(\frac{8}{10}\)</li>
+  </ul>
+</div>
+<p>
+  With the exception of <b>a</b> and <b>e</b>, it can be rather
+  challenging to determine which fractions are given in reduced
+  form. Take the following definition,
+</p>
+<div class="def">
+  <p style="text-align: center;">
+    A fraction \(\frac{a}{b}\) is <b>not</b> reduced if a and b
+    share a common divisor.
+  </p>
+</div> 
+<p>
+  Using this notation, we find that in (d) 7 divides both 35
+  (\(7*5 = 35 \)), 42 (\(7*6 = 42\)), so that (d) is
+  not reduced. Similarly 3 divides both 12 and 33, which shows
+  that(c) is not reduced. Now, try as we might, we cannot
+  find a common divisor for 15 and 28, which would seem to indicate
+  that(b) is in lowest common form. Indeed, since the only
+  divisors of 15 are 3 and 5, and the divisors of 28 are 2,4,7,14,
+  there are no common divisors, so (b) is reduced.
+</p>
+<p>
+  While the choice of divisors above may have appeared arbitrary,
+  
+</p>
+
+
+{% endblock %}

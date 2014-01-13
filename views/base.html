@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  {% block head %}
+  <meta charset="UTF-8"/>
+  <meta name="aplication-name" content="Math Problems"/>
+  <meta name="msapplication-TitleColor" content="#000099"/>
+  <link href="/static/mainpage.css" rel="stylesheet" type="text/css">
+  <title>{% block title %}{% endblock %} </title>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": {scale : 120}})
+  </script>
+  <script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=onload">
+  </script>
+  {% endblock %}
+</head>
+<body>
+  <div id="header">
+    <h1>Header{% block header %}{% endblock %}</h1>
+  </div>
+  <div class="colmask">
+    <div class="colmid">
+      <div class="colleft">
+	<div class="main">
+	  {% block main %}{% endblock %}
+	</div>
+	<div class="left">
+	  <!-- fixed menu structure for links -->
+	  <h4> Tutorials</h4>
+	  <hr/>
+	  <ul>
+	    <li>
+	      <a href="/polynomials" target="_blank">
+		Polynomials</a>
+	    </li>
+	    <li>
+	      <a href="/fractions" target="_blank">
+		Fractions
+	      </a>
+	    </li>
+	    <li>
+  	      <a href="/orderops" target="_blank">
+		Order of Operations
+	      </a>
+	    </li>
+	  </ul>
+	  <hr/>
+	  <h4> References</h4>
+	  <hr />
+	  <ul>
+	    
+	  </ul>
+	  <hr />
+	</div>
+	<div class="right">
+	  <!-- empty, but possibly include login feature -->
+	</div> 
+      </div> 
+    </div> 
+  </div>
+</body>
+</html>
+  
+
+
