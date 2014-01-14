@@ -66,7 +66,7 @@ body {
     list-style : none;
     line-height : 24pt;
 }
-.left a {
+.links {
     display : block;
     text-decoration : none;
     font-size : 16pt;
@@ -105,3 +105,15 @@ body {
     padding : .4em 2em;
 
 }
+.git {
+    color : red;
+    font-size : 12pt;
+    text-decoration : none;
+}
+
+.question {
+    padding-top : 20px;
+}
+
+
+

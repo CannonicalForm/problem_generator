@@ -8,7 +8,7 @@
   <link href="/static/mainpage.css" rel="stylesheet" type="text/css">
   <title>{% block title %}{% endblock %} </title>
   <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({"HTML-CSS": {scale : 120}})
+    MathJax.Hub.Config({"HTML-CSS": {scale : 90}})
   </script>
   <script type="text/javascript"
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=onload">
@@ -31,16 +31,16 @@
 	  <hr/>
 	  <ul>
 	    <li>
-	      <a href="/polynomials" target="_blank">
+	      <a class="links"href="/polynomials" target="_blank">
 		Polynomials</a>
 	    </li>
 	    <li>
-	      <a href="/fractions" target="_blank">
+	      <a class="links" href="/fractions" target="_blank">
 		Fractions
 	      </a>
 	    </li>
 	    <li>
-  	      <a href="/orderops" target="_blank">
+  	      <a class="links" href="/orderops" target="_blank">
 		Order of Operations
 	      </a>
 	    </li>
@@ -48,9 +48,10 @@
 	  <hr/>
 	  <h4> References</h4>
 	  <hr />
-	  <ul>
-	    
-	  </ul>
+	  <p>
+	    For the curious, the source code for this site is
+	    available on <a class="git" href="http://github.com/CannonicalForm/problem_generator" target="_blank"> github </a>
+	  </p>
 	  <hr />
 	</div>
 	<div class="right">

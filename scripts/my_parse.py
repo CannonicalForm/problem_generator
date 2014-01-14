@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-"""This module will hold the main lexing and parsing logic of the program."""
+"""This module will hold the main lexing and parsing logic of the 
+   program, for arithematic problems.
+"""
 
 import re
 import ply.lex as lex
@@ -60,6 +62,7 @@ parser = yacc.yacc(debug = 0, optimize = 1,
                    write_tables = 0)
 
 if __name__ == "__main__":
+
     assert parser.parse("4 + 4") == 8
     assert parser.parse("3/4 + 4/4") == f(7,4)
     assert parser.parse("2 - 3") == -1
@@ -68,3 +71,7 @@ if __name__ == "__main__":
     assert parser.parse("(2 + 3) * 5") == 25
     assert parser.parse("3/4 - 1/4") == f(1,2)
     assert parser.parse("0/4 * 9") == 0
+
+
+
+

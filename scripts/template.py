@@ -3,7 +3,7 @@
 
 """This is going to hold a problem base class."""
 
-class Problem:
+class Problem(object):
     """"The base class for all problems. The governing call method
         is to pass a user into the problem, the user should have
         a ration_correct attribute. Then, perform the following
@@ -18,15 +18,13 @@ class Problem:
             if True:
                call another problem,
             else:
-               re-display the problem, and prompt the user for another
-               solution.
+               re-display the problem, and prompt the user for 
+               another solution.
     """
     def __init__(self,user):
         self.user = user
         self.difficulty = user.level
-        self.problem = ''
         self.number_range = (0,12)
-        self.solution = None
     def build_problem(self):
         pass
     def get_solution(self):

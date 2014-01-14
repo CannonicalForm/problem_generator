@@ -12,7 +12,9 @@
 import argparse
 from random import random
 from calc import Arithematic as Arm
+from calc import arm_validate as arm_v
 from algebraic import Algebraic as Alg
+from algebraic import alg_validate as alg_v
 from template import Test_User
 from sys import argv
 from time import time

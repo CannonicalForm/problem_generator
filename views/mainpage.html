@@ -1,8 +1,75 @@
 {% extends 'base.html' %}
 {% block main %}
 <h1> A Random Problem Generator</h1>
+<div class="def">
+  <p>
+    This is a Mathematics test covering reducing arithematic expressions and
+    finding the roots to linear, quadratic, and cubic equations. 
+  </p>
+</div> 
 <p>
-  
+  Arithematic expresssions, such as \(3 * (\frac{4}{9} + 7)\) are meant to 
+  be reduced to a single term: in this case the solution is 
+  \(\frac{67}{3}\). If manipulating fractions, or performing arithematic
+  is uncomfortable, I would suggest visiting one of the links to the side.
+  They provide a detailed overview of arithematic operations, and a few
+  problem solving strategies.
 </p>
+<p>
+  Finding the roots of an algebraic equation amounts to finding the point,
+  or points at which the equation is zero. For instance, the equation
+  \(x^{2} - 4 = 0\) is valid for \(x = 2 \) and \(x = -2 \). Then the
+  roots of this equation are 2 and -2. There is a thorough guide to solving
+  polynomial equations, like the ones that will be tested on here on the
+  sidebar.
+</p>
+<div  class="def">
+  <p style="text-align:center;">
+    Below are two sample problems. If you feel comfortable solving them
+    continue onto the test. Good luck!
+  </p>
+</div> 
+<div  class="question">
+  <form method="POST" id="prompt">
+    <table>
+      <tr>
+	<td>
+	  <label> <b>1. </b>{{ arm_prompt }} {{ arm_question }}</label>
+	</td>
+	<td>
+	  <input type="text" name="arm_answer" value="{{ arm }}" />
+	</td>
+	<td>
+	  <label>{{ correct_or_not1}}</label>
+	</td>
+	<td>
+	</td>
+      </tr>
+      <tr>
+	<td>
+	  <label> <b>2. </b>{{ alg_prompt }} {{ alg_question }}</label>
+	</td>
+	<td>
+	  <input type="text" name="alg_answer" value="{{ alg }}" />
+	</td>
+	<td>
+	  <label>{{ correct_or_not2}}</label>
+	</td>
+      <tr>
+      <tr>
+	<td>
+	</td>
+	<td>
+	</td>
+	<td>
+	  <input type="submit" name="submit">
+	</td>
+    </table>
+
+
+
+  </form>
+</div> 
+
 
 {% endblock %}

@@ -21,11 +21,15 @@ class Algebraic(Problem):
        Since roots are specified in a Fraction data type, 
        validation assumes a space deliminated string, and
        conversion takes place within the validate method."""
+    def __init__(self,user):
+        super(Algebraic,self).__init__(user)
+        self.solution = self.get_solution()
+        self.problem = self.build_problem()
     def get_solution(self,p = .75):
         """Build the solution set. p represents the probability of
-           a random root being an integer.  Currently the probability
-           breakdown of a Linear (L), Quadratic (Q) and Cubic (C) 
-           equation is given by 
+           a random root being an integer.  Currently the 
+           probability breakdown of a Linear (L), Quadratic (Q) 
+           and Cubic (C) equation is given by 
                -L : 20%
                -Q : 70%
                -C : 10%
@@ -44,7 +48,7 @@ class Algebraic(Problem):
             else:
                 den = random.randint(1,self.number_range[1])
             roots.add(f(random.randint(*self.number_range),den))
-        self.solution = roots
+        return roots
 
     def build_problem(self):
         """If necessary calls get_solutions() to build the solution
@@ -53,9 +57,8 @@ class Algebraic(Problem):
            that solutions set. Note that while roots to the 
            polynomial may be given as fractions, the equations will
            always be presented as an integer one."""
-        if self.solution is None:
-            self.get_solution()
         common = lcm(*[a.denominator for a in self.solution])
+        #Rewrite that monstrosiy below
         coeffs = map(lambda x : x[1],
                      map(lambda x : ((x[0],'') if x[1] == 1 and
                                 x[0] != len(self.solution) else x),
@@ -63,41 +66,43 @@ class Algebraic(Problem):
                                        make_expression(self.solution)
                                    ))))
         n = len(coeffs)
+        p = ''
         for i,a in enumerate(coeffs): #I really need to rewrite this
             if a == 0:
                 continue
             elif a > 0:
                 if i == 0:
-                    self.problem += '%sx^%d'%(str(a),n - 1)
+                    p += '%sx^%d'%(str(a),n - 1)
                 elif i == n - 1:
-                    self.problem += ' + %s' %(str(a))
+                    p += ' + %s' %(str(a))
                 elif i == n - 2:
-                    self.problem += ' + %sx' %(str(a))
+                    p += ' + %sx' %(str(a))
                 else:
-                    self.problem += ' + %sx^%d'%(str(a),n - i - 1)
+                    p += ' + %sx^%d'%(str(a),n - i - 1)
             else:
                 if i == 0:
-                    self.problem += '%sx^%d'%(str(a),n - 1)
+                    p += '%sx^%d'%(str(a),n - 1)
                 elif i == n - 1:
                     if a == 0:
                         pass
                     else:
-                        self.problem += ' - %s' %(str(-1*a))
+                        p += ' - %s' %(str(-1*a))
                 elif i == n - 2:
-                    self.problem += ' - %sx' %(str(-1*a))
-
+                    p += ' - %sx' %(str(-1*a))
                 else:
-                    self.problem += ' - %sx^%d'%(str(-1*a),n - i - 1)
+                    p += ' - %sx^%d'%(str(-1*a),n - i - 1)
+        return p
 
     def to_html(self):
-        """Since all polynomials are given with integer coefficients,
-           it is not necessary to factor them in"""
-        return 'Solve for x in \('+self.problem+'\)'
+        """Since all polynomials are given with integer 
+           coefficients, it is not necessary to factor them in
+        """
+        return ('Solve for x in', '\('+self.problem+'\)')
 
     def validate(self,ans):
         """ans is given as a set of space deliminated integers or
-           fractions, namely 1 2/3 -3 maps to set(f(1,1),f(2,3),
-           f(-3,1)) for comparison with self.solution"""
+        fractions, namely 1 2/3 -3 maps to set(f(1,1),f(2,3),
+        f(-3,1)) for comparison with self.solution"""
         roots = set()
         for r in ans.split():
             r = map(int,r.split('/'))

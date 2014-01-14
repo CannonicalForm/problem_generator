@@ -60,21 +60,22 @@ class Arithematic(Problem):
     """Hold all necessary methods for evaluating an arithematic
        expression, inheriting from Problem."""
     def __init__(self,user):
-        Problem.__init__(self,user)
+        super(Arithematic,self).__init__(user)
         self.grouping = .25
         self.max_level = 1
+        self.problem = self.build_problem()
+        self.solution = self.get_solution()
 
     def build_problem(self):
         exp = Expression(self.number_range[1],
                          self.max_level,self.grouping)
-        self.problem = exp.__str__()
-        self.get_solution()
+        return exp.__str__()
 
     def get_solution(self):
         """Uses a parser build out of the ply module, instead of
            exec, which allows me to return as fractions, instead
            of performing integer division"""
-        self.solution = parser.parse(self.problem)
+        return parser.parse(self.problem)
 
     def to_html(self):
         """Render the problem in a form that is convertable to
@@ -88,12 +89,12 @@ class Arithematic(Problem):
             a,b = f.split('/')
             text = r'\\frac{%s}{%s}'%(a,b)
             h = re.sub('\d+/\d+',text,h)
-        return prompt + h
+        return (prompt,h)
     
     def validate(self,answer):
         """Given a solution as a string, such as 4/3, map that 
-           string into a fraction data type, and perform answer
-           validation."""
+        string into a fraction data type, and perform answer
+        validation."""
         a = map(int,answer.split('/'))
         if len(a) == 1:
             ans = f(a[0],1)
@@ -115,7 +116,7 @@ class Arithematic(Problem):
 
             
 if __name__ == "__main__":
-    assert parser.parse("32 + 4") == 36
+    #assert parser.parse("32 + 4") == 36
     u = Test_User('casey',0)
     a = Arithematic(u)
     a.build_problem()
