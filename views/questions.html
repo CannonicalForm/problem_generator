@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block header %} Questions {% endblock %}
+{% block main %}
+{% for problem in problems %}
+<p>{{problem}}</p>
+{% endfor %}
+<hr/>
+<p>{{is_valid}}</p>
+<hr/>
+<div  class="question">
+  <form method="POST" id="prompt">
+    <label><b>1. </b>{{stmt}}</label>
+    <input type="text" name="answer" value="{{attempt}}">
+    <input type="submit" value="submit">
+  </form>
+</div>
+<hr/>
+{% endblock %}
+{% block right %}
+<h4>Level : {{level}}</h4>
+<p>Solved: {{solved}}/{{attempts}} Attempted</p>
+{% endblock %}
