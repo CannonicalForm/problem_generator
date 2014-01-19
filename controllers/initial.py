@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 
+"""
+   The initial page for the app. A login is not necessary for the bulk
+   of content on this page, so user validation is necessary. However, it
+   is necessary to supply a user in order to generate and validate a
+   sample question. This is unfortunate, and may be fixed by using
+   sessions. Further, note that a sample problem is created, and stored
+   in a different field within the CurrentUser entity, to prevent any
+   strange interactions between this handler and the QuestionPage handler.
+"""
+
 from base import Handler
 from base import env
 from models import validate

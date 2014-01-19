@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""Implement the handler for the questions page. Note that since we are
+   enforcing a required login in the app.yaml file for this page,
+   it is unecessary to validate a user being logged in."""
+
 from base import Handler
 from base import env
 from models import CurrentQuestion
@@ -14,6 +18,10 @@ class QuestionPage(Handler):
         self.template = env.get_template('questions.html')
 
     def get(self):
+        """As apposed to previous impleminations, get() will be the only
+           rendering method in this handler. Note that necessitates
+           pulling updated CurrentQuestion information for each response,
+           since the put() method most likely will change the object."""
         user = users.get_current_user()
         current = search_by_user(user.user_id())
         stmt = current.stmt[0]+' '+current.stmt[1]
@@ -29,6 +37,10 @@ class QuestionPage(Handler):
         self.render(self.template,**context)
 
     def post(self):
+        """Validate the user input, and either prompt the user for a
+           new answer, or prepare the page for a new question, by
+           properly updating the CurrentQuestion entity for the
+           given user."""
         user = users.get_current_user()
         current = search_by_user(user.user_id())
         answer = self.request.get('answer')

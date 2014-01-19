@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-"""Using jinja2, and webapp2, this defines the main 
-   website logic for this application. There will be two 
-   pages: a mainpage, with a few pieces of information 
-   relating to order of operations in arithematic, 
-   problem solving strategies for polynomial equations,
-   and how to use the quadratic equation. This page will 
-   be updated as new problem types are developed.
 """
+   The main entry point for the app. All url's are mapped to their
+   respective handlers. No other logic is allowed here. Note that as
+   their names would indicate, mainapp controlles the majority of sites,
+   i.e. those not requiring being logged in, while logged_in_app controls
+   all pages that app.yaml designates as login:required.
+"""
+
 import webapp2
 from controllers.frac import FractionPage
 from controllers.polys import PolyPage

@@ -1,37 +1,47 @@
 #!/usr/bin/env python
 
+"""
+   Holds all data related objects and functions. Includes the primary data
+   type, CurrentUser, which is indexed by the current user, as well as
+   a custom search_or_create function, using the user_id as a key.
+   Validate is also here, making this the sole entry point for interacting
+   with problem types.
+"""
+
 import random
 from scripts.algebraic import Algebraic
-from scripts.calc import Arithematic
-from google.appengine.ext import db
+from scripts.arithematic import Arithematic
+from google.appengine.ext import ndb
 from google.appengine.api import users
 from fractions import Fraction as f
 
-class CurrentQuestion(db.Model):
-    user = db.UserProperty(auto_current_user_add = True)
-    sample_stmt = db.ListProperty(str)
-    sample_sol = db.ListProperty(str)
-    stmt = db.ListProperty(str)
-    solution = db.ListProperty(str)
-    attempts = db.IntegerProperty(default = 0)
-    solved = db.IntegerProperty(default = 0)
-    level = db.IntegerProperty(default = 0)
-    previous = db.ListProperty(str)
-    valid = db.StringProperty()
+class CurrentQuestion(ndb.Model):
+    user = ndb.UserProperty(auto_current_user_add = True)
+    sample_stmt = ndb.StringProperty(repeat = True)
+    sample_sol = ndb.StringProperty(repeat = True)
+    stmt = ndb.StringProperty(repeat = True)
+    solution = ndb.StringProperty(repeat = True)
+    attempts = ndb.IntegerProperty(default = 0)
+    solved = ndb.IntegerProperty(default = 0)
+    level = ndb.IntegerProperty(default = 0)
+    previous = ndb.StringProperty(repeat = True)
+    valid = ndb.StringProperty()
     
 
 def search_by_user(user_id = None):
+    """Searches the datastore by user_id, and if no entity is found,
+       creates one, and instantiates it with all necessary attributes."""
     if not user_id:
         user = users.get_current_user()
         if not user:
             return None
         user_id = user.user_id()
-    key = db.Key.from_path('CurrentQuestion',user_id)
-    current = db.get(key)
+    key = ndb.Key('CurrentQuestion',user_id)
+    current = key.get()
     if not current:
         sample_sol,sample_stmt = next_question(0)
         solution,html = next_question(0)
-        current = CurrentQuestion(key_name = user_id)
+        current = CurrentQuestion(id = user_id)
         current.attempts = 0
         current.solved = 0
         current.level = 0
@@ -46,6 +56,13 @@ def search_by_user(user_id = None):
 
 
 def next_question(difficulty):
+    """Return a new question to overwrite the stmt, solution attributes on
+       the CurrentQuestion entity. As the difficulty increases more
+       algebraic questions will be created than arithematic. Further,
+       increased difficulty will result in more challenging problem types,
+       using an increasing proportion of fractions, and an expanding
+       range of solutions. The base starts with a solution range of
+       (0,12), and a proportion of fractions of 20%."""
     if random.random() < 0.5 + difficulty*.1:
         q = Arithematic()
     else:
@@ -55,6 +72,11 @@ def next_question(difficulty):
     
 
 def validate(answer,sol):
+    """Validate the users answer (answer) against the solution stored
+       in the datastore. Note that since fractional types are not allowed
+       in the datastore, it is necessary to parse both the user answer
+       and the stored solution. Further, sets are used since order of
+       roots (in the case of algebraic expressions) may be arbitrary."""
     solution = set()
     answers = set()
     for s,ans in zip(answer.split(),sol):

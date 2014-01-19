@@ -18,6 +18,18 @@
 <body>
   <div id="header">
     <h1>Header{% block header %}{% endblock %}</h1>
+    {% if user %}
+    <p class="logged_in">
+      <a href="/users{{nickname}}">{{nickname}}</a> 
+      <a href="{{logout_url}}">logout</a>
+      <a href="static/disclaimer.html" target="_blank">disclaimer</a>
+    </p>
+    {% else %}
+    <p class="logged_in">
+      <a href="{{login_url}}">sign in</a> <a href="static/disclaimer.html">
+	disclaimer</a>
+    </p>
+    {% endif %}
   </div>
   <div class="colmask">
     <div class="colmid">
@@ -56,6 +68,7 @@
 	</div>
 	<div class="right">
 	  <!-- empty, but possibly include login feature -->
+	  {% block right %}{% endblock %}
 	</div> 
       </div> 
     </div> 

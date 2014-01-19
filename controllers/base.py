@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""
+   A set of objects for other handlers to inherit from, including a jinja2
+   environment, a base handler, and an extension to the dict data type,
+   implimenting an extend method, similar to the list.extend method.
+"""
+
 import webapp2
 import jinja2
 import os
@@ -11,6 +17,9 @@ env = jinja2.Environment(loader = jinja2.FileSystemLoader(td),
 
 
 class Handler(webapp2.RequestHandler):
+    """A base handler for use across all other handlers. It sets up
+       rendering, using jinja2, as well as creating contexts that are
+       useful for all handlers, such as a login-url and logout-url."""
     def __init__(self,*args,**kwargs):
         super(Handler,self).__init__(*args,**kwargs)
         self.login_url = users.create_login_url(self.request.path)
